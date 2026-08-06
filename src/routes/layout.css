@@ -1,64 +1,396 @@
 /* src/routes/layout.css */
-@import 'tailwindcss';
-@plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
 
 @layer base {
   :root {
     color-scheme: dark;
+
+    --radius: 1rem;
+
+    --background: theme(colors.slate.950);
+    --foreground: theme(colors.slate.100);
+
+    --surface: theme(colors.slate.900);
+    --surface-2: theme(colors.slate.800);
+
+    --border: theme(colors.slate.800);
+
+    --primary: theme(colors.indigo.500);
+    --primary-hover: theme(colors.indigo.400);
+
+    --muted: theme(colors.slate.400);
+    --danger: theme(colors.red.500);
+    --success: theme(colors.green.500);
+    --warning: theme(colors.amber.500);
+  }
+
+  * {
+    @apply border-slate-800;
+  }
+
+  html {
+    @apply scroll-smooth;
   }
 
   body {
-    @apply bg-slate-950 text-slate-100 antialiased selection:bg-blue-500 selection:text-white min-h-screen font-sans;
+    @apply min-h-screen bg-slate-950 text-slate-100 antialiased font-sans;
+    @apply selection:bg-indigo-500 selection:text-white;
   }
 
-  /* Custom Scrollbar for Dark Aesthetic */
+  img {
+    @apply select-none;
+  }
+
+  hr {
+    @apply border-slate-800;
+  }
+
+  /* Scrollbar */
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
+
   ::-webkit-scrollbar-track {
     @apply bg-slate-950;
   }
+
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
+    @apply rounded-full bg-slate-800 hover:bg-slate-700;
   }
 
+  /* Typography */
+
   h1 {
-    @apply text-3xl sm:text-4xl font-extrabold text-slate-50 tracking-tight mb-2;
+    @apply text-4xl font-extrabold tracking-tight text-slate-50;
   }
 
   h2 {
-    @apply text-xl sm:text-2xl font-bold text-slate-100 tracking-tight mb-2;
+    @apply text-3xl font-bold tracking-tight text-slate-100;
   }
 
   h3 {
-    @apply text-lg font-semibold text-slate-200 mb-1;
+    @apply text-2xl font-semibold text-slate-100;
+  }
+
+  h4 {
+    @apply text-xl font-semibold text-slate-200;
+  }
+
+  h5 {
+    @apply text-lg font-medium text-slate-200;
+  }
+
+  h6 {
+    @apply text-base font-medium text-slate-300 uppercase tracking-wide;
   }
 
   p {
-    @apply text-slate-400 text-sm leading-relaxed mb-3;
+    @apply text-slate-400 leading-relaxed;
+  }
+
+  strong {
+    @apply text-slate-100 font-semibold;
+  }
+
+  code {
+    @apply rounded bg-slate-900 px-1.5 py-0.5 text-sm text-indigo-300;
+  }
+
+  pre {
+    @apply overflow-auto rounded-2xl bg-slate-900 border border-slate-800 p-4;
+  }
+
+  blockquote {
+    @apply border-l-4 border-indigo-500 pl-4 italic text-slate-400;
   }
 
   a {
-    @apply text-blue-400 hover:text-blue-300 transition-colors underline decoration-blue-500/30 underline-offset-4 hover:decoration-blue-400;
+    @apply text-indigo-400 underline underline-offset-4 decoration-indigo-500/30;
+    @apply hover:text-indigo-300 hover:decoration-indigo-400 transition-colors;
+  }
+
+  ul {
+    @apply list-disc pl-6;
+  }
+
+  ol {
+    @apply list-decimal pl-6;
+  }
+
+  li {
+    @apply text-slate-400;
+  }
+
+  table {
+    @apply w-full border-collapse;
+  }
+
+  thead {
+    @apply bg-slate-900;
+  }
+
+  th {
+    @apply px-4 py-3 text-left font-semibold text-slate-100;
+  }
+
+  td {
+    @apply border-t border-slate-800 px-4 py-3 text-slate-400;
   }
 
   button {
-    @apply inline-flex items-center justify-center font-medium transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply transition-all duration-150;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40;
+    @apply disabled:pointer-events-none disabled:opacity-50;
   }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="search"],
-  input[type="number"],
-  select,
+  input,
+  textarea,
+  select {
+    @apply w-full rounded-xl;
+    @apply border border-slate-800 bg-slate-900;
+    @apply px-3.5 py-2.5;
+    @apply text-sm text-slate-100;
+    @apply placeholder:text-slate-500;
+    @apply transition-all;
+    @apply focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20;
+  }
+
   textarea {
-    @apply bg-slate-900/90 border border-slate-800 text-slate-100 text-sm rounded-xl px-3.5 py-2.5 w-full focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-500 transition-all duration-200;
+    @apply resize-y;
+  }
+}
+
+@layer components {
+
+  /* ---------- Buttons ---------- */
+
+    .btn {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply rounded-xl px-4 py-2.5;
+    @apply text-sm font-medium;
+    @apply transition-all;
+    @apply focus-visible:ring-2 focus-visible:ring-indigo-500/40;
+    }
+
+    .btn-primary {
+    @apply bg-indigo-600 text-white;
+    @apply hover:bg-indigo-500;
+    }
+
+    .btn-secondary {
+    @apply bg-slate-800 text-slate-100;
+    @apply hover:bg-slate-700;
+    }
+
+    .btn-outline {
+    @apply border border-slate-700;
+    @apply hover:bg-slate-900;
+    }
+
+    .btn-ghost {
+    @apply hover:bg-slate-900;
+    }
+
+    .btn-danger {
+    @apply bg-red-600 text-white;
+    @apply hover:bg-red-500;
+    }
+
+  /* ---------- Surfaces ---------- */
+
+  .card {
+    @apply rounded-2xl;
+    @apply border border-slate-800;
+    @apply bg-slate-900/80;
+    @apply p-6;
+    @apply shadow-lg shadow-black/20;
   }
 
-  ul, ol {
-    @apply space-y-1 text-slate-400 text-sm;
+  .surface {
+    @apply rounded-2xl border border-slate-800 bg-slate-900;
+  }
+
+  .panel {
+    @apply rounded-xl border border-slate-800 bg-slate-900 p-4;
+  }
+
+  /* ---------- Dialog / Popover ---------- */
+
+  .overlay {
+    @apply fixed inset-0;
+    @apply bg-black/60 backdrop-blur-sm;
+  }
+
+  .dialog {
+    @apply rounded-2xl;
+    @apply border border-slate-800;
+    @apply bg-slate-900;
+    @apply shadow-2xl;
+    @apply p-6;
+  }
+
+  .popover {
+    @apply rounded-xl;
+    @apply border border-slate-800;
+    @apply bg-slate-900;
+    @apply shadow-xl;
+    @apply p-2;
+  }
+
+  /* ---------- Dropdown ---------- */
+
+  .menu {
+    @apply rounded-xl border border-slate-800;
+    @apply bg-slate-900 p-2;
+    @apply shadow-xl;
+  }
+
+  .menu-item {
+    @apply flex cursor-pointer items-center gap-2;
+    @apply rounded-lg px-3 py-2;
+    @apply text-sm text-slate-300;
+    @apply transition-colors;
+    @apply hover:bg-slate-800;
+  }
+
+  .menu-label {
+    @apply px-3 py-2 text-xs uppercase tracking-wider text-slate-500;
+  }
+
+  .menu-separator {
+    @apply my-2 border-t border-slate-800;
+  }
+
+  /* ---------- Select ---------- */
+
+  .select-trigger {
+    @apply flex items-center justify-between;
+    @apply rounded-xl border border-slate-800;
+    @apply bg-slate-900 px-4 py-2.5;
+  }
+
+  .select-content {
+    @apply rounded-xl border border-slate-800;
+    @apply bg-slate-900 p-2;
+  }
+
+  /* ---------- Tabs ---------- */
+
+  .tabs {
+    @apply flex rounded-xl bg-slate-900 p-1;
+  }
+
+  .tab {
+    @apply rounded-lg px-4 py-2 text-sm;
+    @apply text-slate-400;
+    @apply transition-colors;
+  }
+
+  .tab-active {
+    @apply bg-slate-800 text-white;
+  }
+
+  /* ---------- Accordion ---------- */
+
+  .accordion-item {
+    @apply border-b border-slate-800;
+  }
+
+  .accordion-trigger {
+    @apply flex w-full items-center justify-between;
+    @apply py-4;
+    @apply font-medium;
+  }
+
+  .accordion-content {
+    @apply pb-4 text-slate-400;
+  }
+
+  /* ---------- Tooltip ---------- */
+
+  .tooltip {
+    @apply rounded-lg;
+    @apply border border-slate-800;
+    @apply bg-slate-900;
+    @apply px-3 py-2;
+    @apply text-sm;
+    @apply shadow-xl;
+  }
+
+  /* ---------- Badge ---------- */
+
+  .badge {
+    @apply inline-flex items-center;
+    @apply rounded-full;
+    @apply bg-slate-800;
+    @apply px-3 py-1;
+    @apply text-xs font-medium text-slate-300;
+  }
+
+  /* ---------- Skeleton ---------- */
+
+  .skeleton {
+    @apply animate-pulse rounded-xl bg-slate-800;
+  }
+
+  /* ---------- Input Groups ---------- */
+
+  .field {
+    @apply space-y-2;
+  }
+
+  .label {
+    @apply text-sm font-medium text-slate-200;
+  }
+
+  .description {
+    @apply text-sm text-slate-500;
+  }
+
+  .error {
+    @apply text-sm text-red-400;
+  }
+
+  /* ---------- Divider ---------- */
+
+  .divider {
+    @apply border-t border-slate-800;
+  }
+}
+
+@layer utilities {
+
+  .glass {
+    @apply border border-white/10;
+    @apply bg-white/5;
+    @apply backdrop-blur-xl;
+  }
+
+  .surface-hover {
+    @apply transition-colors hover:bg-slate-800;
+  }
+
+  .ring-primary {
+    @apply ring-2 ring-indigo-500/30;
+  }
+
+  .text-muted {
+    @apply text-slate-400;
+  }
+
+  .text-subtle {
+    @apply text-slate-500;
+  }
+
+  .container-page {
+    @apply mx-auto max-w-7xl px-6;
+  }
+
+  .center {
+    @apply flex items-center justify-center;
   }
 }

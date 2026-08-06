@@ -10,4 +10,6 @@ declare global {
 	}
 }
 
+/// <reference types="mdsvex" />
+
 export {};

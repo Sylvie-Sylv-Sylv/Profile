@@ -1,49 +1,34 @@
 <script lang="ts">
-	import './layout.css';
+    import "./layout.css";
 
-	let { children } = $props();
+    import Navbar from "$lib/components/layout/Navbar.svelte";
+    import Footer from "$lib/components/layout/Footer.svelte";
 
-	const links = [
-		{ title: 'Home', href: '/' },
-		{ title: 'About', href: '/about' },
-		{ title: 'Projects', href: '/projects' },
-		{ title: 'Research', href: '/researches' },
-		{ title: 'Blog', href: '/blog' },
-		{ title: 'Contact', href: '/contact' }
-	];
+    import type { RouteId } from "$app/types";
+
+    let { children } = $props();
+
+    type Link = {
+        title: string;
+        href: RouteId;
+    }
+
+    const links: Link[]= [
+        { title: "Home", href: "/" },
+        { title: "About", href: "/about" },
+        { title: "Projects", href: "/projects" },
+        { title: "Research", href: "/researches" },
+        { title: "Blog", href: "/blog" },
+        { title: "Contact", href: "/contact" }
+    ];
 </script>
 
-<div class="min-h-screen bg-slate-950 text-slate-100">
-	<header class="border-b border-slate-800">
-		<div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-			<a href="/" class="text-lg font-bold no-underline">
-				Sylvie Sylv Sylv
-			</a>
+<div class="flex min-h-screen flex-col bg-slate-950">
+    <Navbar {links} />
 
-			<nav class="flex gap-6">
-				{#each links as link}
-					<a
-						href={link.href}
-						class="text-slate-400 no-underline transition hover:text-white"
-					>
-						{link.title}
-					</a>
-				{/each}
-			</nav>
-		</div>
-	</header>
+    <main class="flex-1">
+        {@render children()}
+    </main>
 
-	<main>
-		{@render children()}
-	</main>
-
-	<footer class="border-t border-slate-800">
-		<div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 text-sm text-slate-500">
-			<p>© {new Date().getFullYear()} Sylvie Sylv Sylv</p>
-
-			<p>
-				Built with SvelteKit & Tailwind CSS
-			</p>
-		</div>
-	</footer>
+    <Footer />
 </div>

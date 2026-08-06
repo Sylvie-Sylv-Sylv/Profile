@@ -1,5 +1,13 @@
 <script lang="ts">
-	const pages = [
+	import type { RouteId } from "$app/types";
+
+	type Page = {
+		title: string;
+		description: string;
+		href: RouteId;
+	};
+
+	const pages: Page[] = [
 		{
 			title: 'About',
 			description: 'Who I am, what I enjoy building, and my journey.',
@@ -26,6 +34,8 @@
 			href: '/contact'
 		}
 	];
+
+	import { resolve } from "$app/paths";
 </script>
 
 <svelte:head>
@@ -40,11 +50,11 @@
 
 	<section class="flex flex-1 items-center py-20">
 		<div class="max-w-3xl">
-			<p class="mb-3 font-medium uppercase tracking-[0.3em] text-blue-400">
+			<p class="mb-3 font-medium uppercase tracking-[0.3em] text-indigo-400">
 				Hello, I'm
 			</p>
 
-			<h1 class="mb-6 text-5xl font-black sm:text-7xl">
+			<h1 class="mb-6 text-5xl font-black sm:text-7xl text-indigo-50">
 				Sylvie Sylv Sylv
 			</h1>
 
@@ -59,15 +69,15 @@
 
 			<div class="mt-10 flex flex-wrap gap-4">
 				<a
-					href="/projects"
-					class="rounded-xl bg-blue-600 px-5 py-3 font-medium text-white no-underline transition hover:bg-blue-500"
+					href={resolve("/projects")}
+					class="rounded-xl bg-indigo-500 px-5 py-3 font-medium text-indigo-50 no-underline transition hover:bg-indigo-500"
 				>
 					View Projects
 				</a>
 
 				<a
-					href="/about"
-					class="rounded-xl border border-slate-700 px-5 py-3 font-medium text-slate-200 no-underline transition hover:border-slate-500"
+					href={resolve("/about")}
+					class="rounded-xl border border-slate-700 px-5 py-3 font-medium text-indigo-50 no-underline transition hover:border-slate-500"
 				>
 					About Me
 				</a>
@@ -84,12 +94,12 @@
 		</div>
 
 		<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-			{#each pages as page}
+			{#each pages as page (page.title)}
 				<a
-					href={page.href}
-					class="group rounded-2xl border border-slate-800 bg-slate-900/50 p-6 no-underline transition hover:border-blue-500/50 hover:bg-slate-900"
+					href={resolve(page.href)}
+					class="group rounded-2xl border border-slate-800 bg-slate-900/50 p-6 no-underline transition hover:border-indigo-500/50 hover:bg-slate-900"
 				>
-					<h3 class="transition group-hover:text-blue-400">
+					<h3 class="transition group-hover:text-indigo-400">
 						{page.title}
 					</h3>
 
