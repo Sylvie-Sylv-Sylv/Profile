@@ -31,20 +31,6 @@ jobs:
 
       - run: pnpm install
       - run: pnpm build
-      - name: Debug build output
-        run: |
-          pwd
-          echo "Current directory:"
-          ls -la
-          echo ""
-          echo "Directories:"
-          find . -maxdepth 3 -type d | sort
-
-            - uses: actions/configure-pages@v5
-
-            - uses: actions/upload-pages-artifact@v3
-              with:
-                path: build
 
   deploy:
     environment:
