@@ -42,31 +42,35 @@
 </script>
 
 <svelte:head>
-	<title>Contact • Sylvie Sylv Sylv</title>
+	<title>Contact | Sylvie Sylv Sylv</title>
 	<meta
 		name="description"
 		content="Contact Sylvie Sylv Sylv through email, GitHub, or Bluesky."
 	/>
 </svelte:head>
 
-<section class="container-page py-24">
-	<div class="mx-auto max-w-3xl space-y-12">
-		<header class="space-y-4 text-center">
-			<p class="text-sm font-medium uppercase tracking-[0.3em] text-indigo-400">
-				Get in Touch
-			</p>
+<div class="mx-auto max-w-6xl px-6 py-16">
+	<section class="mb-16">
+		<p class="mb-3 uppercase tracking-[0.3em] text-indigo-400">
+			Get in Touch
+		</p>
 
-			<h1>Contact</h1>
+		<h1 class="mb-6 text-5xl font-black">
+			Contact
+		</h1>
 
-			<p class="mx-auto max-w-2xl">
-				Whether you want to discuss research, open-source projects, Minecraft
-				modding, AI, or simply say hello, I'd love to hear from you.
-			</p>
-		</header>
+		<p class="max-w-3xl text-lg leading-8 text-slate-400">
+			Whether you want to discuss research, open-source projects, Minecraft
+			modding, AI, or simply say hello, I'd love to hear from you.
+		</p>
+	</section>
 
-		<div class="card space-y-8">
-			<div>
-				<h2 class="mb-2 text-2xl">Sylvie Sylv Sylv</h2>
+	<section>
+		<div class="rounded-2xl border border-slate-800 bg-slate-900/40 p-8">
+			<div class="mb-10">
+				<h2 class="text-2xl font-bold">
+					Sylvie Sylv Sylv
+				</h2>
 
 				<div class="mt-4 flex items-center gap-2 text-slate-400">
 					<MapPin size={18} />
@@ -74,25 +78,27 @@
 				</div>
 			</div>
 
-			<div class="divider"></div>
-
-			<div class="grid gap-6">
+			<div class="grid gap-5">
 				{#each contacts as contact (contact.id)}
 					<a
 						href={contact.href}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="surface surface-hover flex items-start justify-between gap-6 p-5 transition-all hover:-translate-y-0.5 hover:border-indigo-500/40"
+						class="group flex items-start justify-between rounded-2xl border border-slate-800 bg-slate-900/50 p-6 no-underline transition hover:border-indigo-500/50 hover:bg-slate-900"
 					>
 						<div class="flex gap-4">
-							<div class="center h-11 w-11 rounded-xl bg-indigo-500/10 text-indigo-400">
+							<div
+								class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400"
+							>
 								<contact.icon size={20} />
 							</div>
 
 							<div>
-								<h3 class="text-lg">{contact.title}</h3>
+								<h3 class="transition group-hover:text-indigo-400">
+									{contact.title}
+								</h3>
 
-								<p class="mt-1 break-all text-slate-300">
+								<p class="mt-2 break-all text-slate-300">
 									{contact.value}
 								</p>
 
@@ -104,28 +110,26 @@
 
 						<ExternalLink
 							size={18}
-							class="mt-1 shrink-0 text-slate-500"
+							class="mt-1 shrink-0 text-slate-500 transition group-hover:text-indigo-400"
 						/>
 					</a>
 				{/each}
 			</div>
 
-			<div class="divider"></div>
-
-			<div class="flex flex-wrap gap-3">
+			<div class="mt-10 flex flex-wrap gap-4">
 				<a
-					class="btn btn-primary"
 					href="mailto:sylvie.sylv.sylv@gmail.com"
+					class="inline-flex items-center gap-2 rounded-xl bg-indigo-500 px-5 py-3 font-medium text-indigo-50 no-underline transition hover:bg-indigo-400"
 				>
 					<Mail size={18} />
 					Send an Email
 				</a>
 
 				<a
-					class="btn btn-secondary"
 					href="https://github.com/Sylvie-Sylv-Sylv"
 					target="_blank"
 					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-5 py-3 font-medium text-indigo-50 no-underline transition hover:border-slate-500"
 				>
 					<Code size={18} />
 					View GitHub
@@ -133,10 +137,8 @@
 			</div>
 		</div>
 
-		<div class="text-center">
-			<p class="text-sm text-slate-500">
-				I usually respond within a few days.
-			</p>
-		</div>
-	</div>
-</section>
+		<p class="mt-8 text-center text-sm text-slate-500">
+			I usually respond within a few days.
+		</p>
+	</section>
+</div>
